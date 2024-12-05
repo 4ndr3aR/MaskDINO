@@ -1,4 +1,7 @@
 _BASE_: Base-COCO-InstanceSegmentation.yaml
+DATASETS:
+  TRAIN: ("camvid_train_instance",) #coco_2017_train
+  TEST: ("camvid_test_instance",) #coco_2017_val
 MODEL:
   META_ARCHITECTURE: "MaskDINO"
   SEM_SEG_HEAD:

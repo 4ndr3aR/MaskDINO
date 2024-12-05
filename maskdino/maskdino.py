@@ -278,6 +278,7 @@ class MaskDINO(nn.Module):
             mask_cls_results = outputs["pred_logits"]
             mask_pred_results = outputs["pred_masks"]
             mask_box_results = outputs["pred_boxes"]
+
             # upsample masks
             mask_pred_results = F.interpolate(
                 mask_pred_results,
