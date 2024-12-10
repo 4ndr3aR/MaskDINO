@@ -181,6 +181,6 @@ class MaskFormerSemanticDatasetMapper:
                 instances.gt_masks = masks.tensor
                 instances.gt_boxes = masks.get_bounding_boxes()
 
-            dataset_dict["instances"] = instances
+            dataset_dict["instances"] = instances   
 
         return dataset_dict

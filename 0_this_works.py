@@ -79,3 +79,32 @@ In order to register a different dataset use a script similar to those in maskdi
 To use the dataset with a model: create the two corresponding .yaml file.
 '''
 # %%
+
+#creating the dataloader
+from maskdino.data.dataset_mappers.mask_former_semantic_dataset_mapper import MaskFormerSemanticDatasetMapper
+from detectron2.data import build_detection_train_loader
+
+mapper_old = MaskFormerSemanticDatasetMapper(cfg) # takes an dict of image input and returns a dict
+# to get the dataloader taken this below from train_net.py
+data_loader_old = build_detection_train_loader(cfg, mapper=mapper_old) #returns the dataloader
+batch = next(data_loader_old.__iter__())
+# the batch is a list of dict, one for every images
+# following: batch content
+# each image is a dict with: file_path, img dimentions, image, mask
+for e in batch:
+    print(f'{type(e) = }')
+    if isinstance(e, dict):
+        for i, key in enumerate(e.keys()):
+            if i == 0:
+                print(f'\t{key} = {e[key]}')
+            else:
+                print(f'\t{key}')
+
+import matplotlib.pyplot as plt
+image = batch[0]
+fig, ax = plt.subplots(1,2)
+ax[0].imshow(image['image'].permute(1,2,0))
+ax[1].imshow(image['sem_seg'])
+
+# don't really know what is inside it, but it appears that the DefaultTrainer want's it 
+instances = image['instances'].get_fields()

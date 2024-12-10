@@ -59,7 +59,7 @@ def add_maskdino_config(cfg):
     cfg.MODEL.MaskDINO.DEC_LAYERS = 6
     cfg.MODEL.MaskDINO.INITIAL_PRED = True
     cfg.MODEL.MaskDINO.PRE_NORM = False
-    cfg.MODEL.MaskDINO.BOX_LOSS = True
+    cfg.MODEL.MaskDINO.BOX_LOSS = False #True ADDED
     cfg.MODEL.MaskDINO.HIDDEN_DIM = 256
     cfg.MODEL.MaskDINO.NUM_OBJECT_QUERIES = 100
 
