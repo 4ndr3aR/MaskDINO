@@ -79,5 +79,6 @@ def register_all_camvid_coco(root):
         )
 
 
-_root = os.getenv("DETECTRON2_DATASETS", "/mnt/shared") #replaced 'datasets' with correct path
+#_root = os.getenv("DETECTRON2_DATASETS", "/mnt/shared") #replaced 'datasets' with correct path
+_root = os.getenv("DETECTRON2_DATASETS", "/mnt/raid1/dataset/") #replaced 'datasets' with correct path
 register_all_camvid_coco(_root)
