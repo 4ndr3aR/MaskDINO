@@ -272,7 +272,7 @@ class MaskDINO(nn.Module):
                 else:
                     # remove this loss if not specified in `weight_dict`
                     losses.pop(k)
-            return losses
+            return losses, outputs #ADDED the outputs
         else:
             outputs, _ = self.sem_seg_head(features)
             mask_cls_results = outputs["pred_logits"]
