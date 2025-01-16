@@ -1,4 +1,4 @@
-_BASE_: Base-SPREAD-InstanceSegmentation.yaml
+_BASE_: base-spread-instance-segmentation.yaml
 DATASETS:
   TRAIN: ("spread_train",)
   VALID: ("spread_valid",)
@@ -7,7 +7,7 @@ MODEL:
   META_ARCHITECTURE: "MaskDINO"
   ROI_HEADS:
     NUM_CLASSES: 1
-    BATCH_SIZE_PER_IMAGE: 256	# Default is 512, using 256 for this dataset
+    BATCH_SIZE_PER_IMAGE: 256          # Default is 512, using 256 for this dataset
   SEM_SEG_HEAD:
     NAME: "MaskDINOHead"
     IGNORE_VALUE: 255
@@ -43,7 +43,7 @@ MODEL:
     PRE_NORM: False
     ENFORCE_INPUT_PROJ: False
     SIZE_DIVISIBILITY: 32
-    DEC_LAYERS: 9		# 9+1, 9 decoder layers, add one for the loss on learnable query
+    DEC_LAYERS: 9                      # 9+1, 9 decoder layers, add one for the loss on learnable query
     TRAIN_NUM_POINTS: 12544
     OVERSAMPLE_RATIO: 3.0
     IMPORTANCE_SAMPLE_RATIO: 0.75
@@ -62,11 +62,11 @@ MODEL:
 DATALOADER:
   NUM_WORKERS: 32
 SOLVER:
-  IMS_PER_BATCH: 32		# this is the real batch size (see: https://detectron2.readthedocs.io/en/latest/modules/config.html)
-  BASE_LR: 0.0005		# pick a reasonable LR
-  MAX_ITER: 10000		# 1000 iterations = 1.5 hours on RTX A6000
-  CHECKPOINT_PERIOD: 500	# save checkpoint every 500 iterations
-  REFERENCE_WORLD_SIZE: 2	# for dataparallel hopefully (nope, it doesn't work)
+  IMS_PER_BATCH: 32                    # this is the real batch size (see: https://detectron2.readthedocs.io/en/latest/modules/config.html)
+  BASE_LR: 0.0005                      # pick a reasonable LR
+  MAX_ITER: 50000                      # 1000 iterations = 1.5 hours on RTX A6000
+  CHECKPOINT_PERIOD: 500               # save checkpoint every 500 iterations
+  REFERENCE_WORLD_SIZE: 2              # for dataparallel hopefully (nope, it doesn't work)
   AMP:
     ENABLED: True
 TEST:
