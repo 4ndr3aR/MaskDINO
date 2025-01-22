@@ -135,6 +135,8 @@ class CustomInstanceSegmentationTrainer(DefaultTrainer):
         logger = logging.getLogger("MaskDINO")
         if not logger.isEnabledFor(logging.INFO):  # setup_logger is not called for d2
             setup_logger()
+
+        dbgprint(train, LogLevel.INFO, f'comm.get_world_size() is {comm.get_world_size()}')
         cfg = DefaultTrainer.auto_scale_workers(cfg, comm.get_world_size())
 
         # Assume these objects must be constructed in this order.
@@ -143,9 +145,17 @@ class CustomInstanceSegmentationTrainer(DefaultTrainer):
         data_loader = self.build_train_loader(cfg)
 
         model = create_ddp_model(model, broadcast_buffers=False)
+        if cfg.SOLVER.AMP.ENABLED:
+            dbgprint(train, LogLevel.INFO, f'SOLVER.AMP.ENABLED is True, creating an AMPTrainer')
+            self._trainer = AMPTrainer(model, data_loader, optimizer)
+        else:
+            dbgprint(train, LogLevel.INFO, f'SOLVER.AMP.ENABLED is False, creating a SimpleTrainer')
+            self._trainer = SimpleTrainer(model, data_loader, optimizer)
+        '''
         self._trainer = (AMPTrainer if cfg.SOLVER.AMP.ENABLED else SimpleTrainer)(
             model, data_loader, optimizer
         )
+        '''
 
         self.scheduler = self.build_lr_scheduler(cfg, optimizer)
 
@@ -408,8 +418,12 @@ class CustomInstanceSegmentationTrainer(DefaultTrainer):
         i = random.randint(0, len(batched_input)-1)
 
         image_dict = batched_input[i]
-        image, mask_gt = image_dict['image'], image_dict['sem_seg']
+        dbgprint(train, LogLevel.INFO, f'{image_dict.keys() = }')
+        dbgprint(train, LogLevel.INFO, f'{type(image_dict["instances"]) = }')
+        dbgprint(train, LogLevel.INFO, f'{len(image_dict["instances"]) = }')
+        image, mask_gt = image_dict['image'], image_dict['padding_mask']
 
+        dbgprint(train, LogLevel.INFO, f'{outputs.keys() = }')
         mask, logits = outputs['pred_masks'][i], outputs['pred_logits'][i]
         mask_cls = F.softmax(logits, dim=-1)[..., :-1]
         mask = mask.sigmoid()
@@ -581,7 +595,7 @@ class CustomInstanceSegmentationTrainer(DefaultTrainer):
 #from train_net import Trainer
 
 #trainer = DefaultTrainer(cfg)
-trainer = CustomInstanceSegmentationTrainer(cfg)
+trainer = CustomInstanceSegmentationTrainer(cfg, wandb_log=True)
 trainer.resume_or_load(resume=False)
 batch_tr = next(trainer.data_loader.__iter__())
 for e in batch_tr:

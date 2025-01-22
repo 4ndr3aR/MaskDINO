@@ -60,7 +60,7 @@ MODEL:
       OBJECT_MASK_THRESHOLD: 0.25
 
 DATALOADER:
-  NUM_WORKERS: 32
+  NUM_WORKERS: 16
 SOLVER:
   IMS_PER_BATCH: 8                     # this is the real batch size (see: https://detectron2.readthedocs.io/en/latest/modules/config.html)
   BASE_LR: 0.0005                      # pick a reasonable LR
