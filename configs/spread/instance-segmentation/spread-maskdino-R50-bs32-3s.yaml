@@ -61,14 +61,15 @@ MODEL:
 
 DATALOADER:
   NUM_WORKERS: 16
+  ASPECT_RATIO_GROUPING: False         # https://github.com/armandmcqueen/tensorpack-mask-rcnn/issues/67#issue-467184544
 SOLVER:
   IMS_PER_BATCH: 4                     # this is the real batch size (see: https://detectron2.readthedocs.io/en/latest/modules/config.html)
   BASE_LR: 0.0005                      # pick a reasonable LR
   MAX_ITER: 50000                      # 1000 iterations = 1.5 hours on RTX A6000
   CHECKPOINT_PERIOD: 500               # save checkpoint every 500 iterations
-  REFERENCE_WORLD_SIZE: 1              # for dataparallel hopefully (nope, it doesn't work)
+  REFERENCE_WORLD_SIZE: 0              # for dataparallel hopefully (nope, it doesn't work)
   AMP:
-    ENABLED: True
+    ENABLED: False
 TEST:
   EVAL_PERIOD: 5000
 #  EVAL_FLAG: 1
