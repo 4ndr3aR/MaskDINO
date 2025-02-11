@@ -9,6 +9,9 @@ from detectron2.data import DatasetCatalog, MetadataCatalog
 from detectron2.data.datasets.coco import load_coco_json, register_coco_instances
 from detectron2.utils.file_io import PathManager
 
+#BASE_DIR = '/mnt/raid1/dataset'
+BASE_DIR = '/mnt/data/dataset'
+
 SPREAD_CATEGORIES = [{"id": 1, "name": "tree", "supercategory": "plant"},]
 
 def _get_spread_instances_meta():
@@ -35,9 +38,9 @@ def _get_spread_instances_meta():
 	return ret
 
 def register_all_spread(spread_dir):
-	register_coco_instances("spread_train", _get_spread_instances_meta(), f"{spread_dir}/train.json", "/mnt/raid1/dataset/spread/spread-v2-coco")
-	register_coco_instances("spread_valid", _get_spread_instances_meta(), f"{spread_dir}/valid.json", "/mnt/raid1/dataset/spread/spread-v2-coco")
-	register_coco_instances("spread_test" , _get_spread_instances_meta(), f"{spread_dir}/test.json" , "/mnt/raid1/dataset/spread/spread-v2-coco")
+	register_coco_instances("spread_train", _get_spread_instances_meta(), f"{spread_dir}/train.json", BASE_DIR + "/spread/spread-v2-coco")
+	register_coco_instances("spread_valid", _get_spread_instances_meta(), f"{spread_dir}/valid.json", BASE_DIR + "/spread/spread-v2-coco")
+	register_coco_instances("spread_test" , _get_spread_instances_meta(), f"{spread_dir}/test.json" , BASE_DIR + "/spread/spread-v2-coco")
 
 '''
 def _get_ade_instances_meta():
@@ -66,6 +69,8 @@ def register_all_ade20k_instance(root):
 
 
 
-SPREAD_DIR = '/mnt/raid1/dataset/spread/spread-v2'
+#SPREAD_DIR = '/mnt/raid1/dataset/spread/spread-v2'
+#SPREAD_DIR = '/mnt/data/dataset/spread/spread-v2'
+SPREAD_DIR = BASE_DIR + '/spread/spread-v2'
 #_root = os.getenv("DETECTRON2_DATASETS", "datasets")
 register_all_spread(SPREAD_DIR)
