@@ -1,3 +1,5 @@
+# made this a separate gitlab repo to avoid having to push notebooks as LFS (space runs out too quickly)
+notebooks
 # output dir
 output
 instant_test_output
