@@ -16,6 +16,7 @@ BASE_DIR = '/mnt/raid1/dataset/'
 #ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-961624-instances-everything-at-960x540px-20250319'
 #ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-611442-instances-masks-480x270-polygon-annotations-20250320'
 ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-611442-instances-masks-480x270-polygon-annotations-20250320-renamed-base-dir-to-spread-480x270'
+ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-961624-poly-annotations-960x540-20250325'
 
 SPREAD_CATEGORIES = [{"id": 1, "name": "tree", "supercategory": "plant"},]
 
