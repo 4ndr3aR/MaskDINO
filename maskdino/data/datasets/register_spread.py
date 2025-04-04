@@ -9,14 +9,15 @@ from detectron2.data import DatasetCatalog, MetadataCatalog
 from detectron2.data.datasets.coco import load_coco_json, register_coco_instances
 from detectron2.utils.file_io import PathManager
 
-BASE_DIR = '/mnt/raid1/dataset/'
-#BASE_DIR = '/mnt/data/dataset'
+#BASE_DIR = '/mnt/raid1/dataset/'
+BASE_DIR = '/mnt/data/dataset/'
 #ANNO_DIR = 'spread/coco-annotations/spread-v2-coco'
 #ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36170-samples-612023-instances-20250314'
 #ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-961624-instances-everything-at-960x540px-20250319'
 #ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-611442-instances-masks-480x270-polygon-annotations-20250320'
-ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-611442-instances-masks-480x270-polygon-annotations-20250320-renamed-base-dir-to-spread-480x270'
-ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-961624-poly-annotations-960x540-20250325'
+#ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-611442-instances-masks-480x270-polygon-annotations-20250320-renamed-base-dir-to-spread-480x270'
+#ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-961624-poly-annotations-960x540-20250325'
+ANNO_DIR = 'spread/coco-annotations/spread-coco-annotations-o1-36173-samples-961624-poly-annotations-960x540-20250325-mnt-data'
 
 SPREAD_CATEGORIES = [{"id": 1, "name": "tree", "supercategory": "plant"},]
 

@@ -13,9 +13,12 @@ print(f'Loading random and copy...')
 import random
 import copy
 
-print(f'Loading SAM2 modules...')
-from sam2.build_sam import build_sam2
-from sam2.sam2_image_predictor import SAM2ImagePredictor
+try:
+	print(f'Loading SAM2 modules...')
+	from sam2.build_sam import build_sam2
+	from sam2.sam2_image_predictor import SAM2ImagePredictor
+except ImportError:
+	print(f'Failed to import SAM2 modules, continuing...')
 
 print(f'Loading dbgprint...')
 from dbgprint import dbgprint
